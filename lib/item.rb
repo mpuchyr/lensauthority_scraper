@@ -1,3 +1,4 @@
+require 'pry'
 class Item
     attr_accessor :brand, :name, :link, :description, :price, :stock, :condition
 
@@ -20,4 +21,23 @@ class Item
         end  
     end
 
+    def self.find_by_brand(searched_brand)
+        self.all.select {|item| item.brand.downcase == searched_brand.downcase}
+    end
+
+    def self.find_by_name(searched_name)
+        self.all.select {|item| item.name.downcase == searched_name.downcase}
+    end
+
+    def self.find_by_condition(searched_condtion)
+        self.all.select {|item| item.condition.downcase == searched_name.downcase}
+    end
+
+    def self.find_by_stock(searched_stock)
+        self.all.select {|item| item.stock.downcase == search_stock.downcase}
+    end
+
 end
+
+item = {:name => "This thing", :brand => "Sony", :condition => "Good"}
+binding.pry
