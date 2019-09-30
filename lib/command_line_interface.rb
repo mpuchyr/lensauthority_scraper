@@ -42,6 +42,12 @@ class CommandLineInterface
         end
     end
 
+    def display_specific_items(item_array)
+        item_array.each_with_index do |item, index|
+            puts "#{index + 1}. #{item.name}"
+        end
+    end
+
 end
 
 cli = CommandLineInterface.new
