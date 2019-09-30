@@ -36,6 +36,12 @@ class CommandLineInterface
         puts "5. Exit"
     end
 
+    def display_all
+        Item.all.each_with_index do |item, index|
+            puts "#{index + 1}. #{item.name}"
+        end
+    end
+
 end
 
 cli = CommandLineInterface.new

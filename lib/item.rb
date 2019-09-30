@@ -37,6 +37,7 @@ class Item
         self.all.select {|item| item.stock.downcase == search_stock.downcase}
     end
 
+
 end
 
 item = {:name => "This thing", :brand => "Sony", :condition => "Good"}
