@@ -29,13 +29,6 @@ class Item
         self.all.select {|item| item.name.downcase == searched_name.downcase}
     end
 
-    def self.find_by_condition(searched_condtion)
-        self.all.select {|item| item.condition.downcase == searched_name.downcase}
-    end
-
-    def self.find_by_stock(searched_stock)
-        self.all.select {|item| item.stock.downcase == search_stock.downcase}
-    end
 
     def display_info
         puts self.name
@@ -50,6 +43,3 @@ class Item
 
 
 end
-
-item = {:name => "This thing", :brand => "Sony", :condition => "Good"}
-binding.pry
