@@ -8,7 +8,7 @@ class CommandLineInterface
 
     def run
         create_deal_items
-        add_details_to_items
+        # add_details_to_items
         binding.pry
     end
 
@@ -46,6 +46,10 @@ class CommandLineInterface
         item_array.each_with_index do |item, index|
             puts "#{index + 1}. #{item.name}"
         end
+    end
+
+    def display_item_info(index)
+        
     end
 
 end

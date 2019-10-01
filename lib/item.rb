@@ -37,6 +37,17 @@ class Item
         self.all.select {|item| item.stock.downcase == search_stock.downcase}
     end
 
+    def display_info
+        puts self.name
+        puts "Brand: #{self.brand}"
+        if self.price
+            puts self.price
+            puts "Condition: #{self.condition}"
+        end
+        puts "Stock: #{self.stock}"
+        puts self.description
+    end
+
 
 end
 
