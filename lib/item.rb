@@ -18,7 +18,7 @@ class Item
     def add_more_details(details_hash)
         details_hash.each do |d_key, d_value|
             self.send("#{d_key}=", d_value)
-        end  
+        end
     end
 
     def self.find_by_brand(searched_brand)
@@ -26,7 +26,7 @@ class Item
     end
 
     def self.find_by_name(searched_name)
-        self.all.select {|item| item.name.downcase == searched_name.downcase}
+        self.all.detect {|item| item.name.downcase == searched_name.downcase}
     end
 
 

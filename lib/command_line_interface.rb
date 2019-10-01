@@ -12,7 +12,6 @@ class CommandLineInterface
         until @user_input == "exit" do
             main_menu
             @user_input = gets.chomp
-            # binding.pry
             case @user_input
             when "1"
                 display_all
@@ -23,13 +22,24 @@ class CommandLineInterface
                 puts "Enter the product name:"
                 @user_input = gets.chomp
                 item = Item.find_by_name(@user_input)
-                add_details_to_item(item)
-                item.display_info
+                if item
+                    add_details_to_item(item)
+                    item.display_info
+                else
+                    puts "Sorry, item not found."
+                end
             when "3"
                 puts "Enter the brand you're looking for:"
                 @user_input = gets.chomp
                 items = Item.find_by_brand(@user_input)
-                display_specific_items(items)
+                if items != []
+                    display_specific_items(items)
+                    puts "Enter the number of the item you'd like to know more about:"
+                    @user_input = gets.chomp
+                    choose_item((@user_input.to_i - 1), items)
+                else
+                    puts "Sorry, there are no items from that brand."
+                end
             end
         end
     end
