@@ -19,11 +19,9 @@ class CommandLineInterface
         end        
     end
 
-    def add_details_to_items
-        Item.all.each do |item|
-            details_hash = Scraper.scrape_details_page(item.link)
-            item.add_more_details(details_hash)
-        end
+    def add_details_to_item(item)
+        details_hash = Scraper.scrape_details_page(item.link)
+        item.add_more_details(details_hash)
     end
 
     def menu
@@ -48,9 +46,6 @@ class CommandLineInterface
         end
     end
 
-    def display_item_info(index)
-        
-    end
 
 end
 
