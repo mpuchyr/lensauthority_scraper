@@ -29,7 +29,7 @@ class Item
         possible_matches = []
         self.all.each do |item|
             if item.name.downcase == searched_name.downcase
-                possible_matches << item
+                possible_matches = [item]
                 break
             elsif item.name.downcase.include?(searched_name.downcase)
                 possible_matches << item
