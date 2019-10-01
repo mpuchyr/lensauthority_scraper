@@ -75,14 +75,14 @@ class CommandLineInterface
     end
 
     def display_all
-        Item.all.each_with_index do |item, index|
-            puts "#{index + 1}. #{item.name}"
+        Item.all.each.with_index(1) do |item, index|
+            puts "#{index}. #{item.name}"
         end
     end
 
     def display_specific_items(item_array)
-        item_array.each_with_index do |item, index|
-            puts "#{index + 1}. #{item.name}"
+        item_array.each.with_index(1) do |item, index|
+            puts "#{index}. #{item.name}"
         end
     end
 
@@ -94,8 +94,4 @@ class CommandLineInterface
 
 
 end
-
-cli = CommandLineInterface.new
-cli.run
-
 
