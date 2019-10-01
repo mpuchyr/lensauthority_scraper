@@ -12,12 +12,16 @@ class CommandLineInterface
         until @user_input == "exit" do
             main_menu
             @user_input = gets.chomp
+
             case @user_input
             when "1"
                 display_all
                 puts "Enter the number of the item you'd like to know more about:"
                 @user_input = gets.chomp
-                choose_item((@user_input.to_i - 1), Item.all)
+                if @user_input != "exit"
+                    choose_item((@user_input.to_i - 1), Item.all)
+                end
+
             when "2"
                 puts "Enter the product name:"
                 @user_input = gets.chomp
