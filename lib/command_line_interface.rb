@@ -26,12 +26,19 @@ class CommandLineInterface
                 puts "Enter the product name:"
                 @user_input = gets.chomp
                 if @user_input != "exit"
-                item = Item.find_by_name(@user_input)
-                    if item
-                        add_details_to_item(item)
-                        item.display_info
+                items = Item.find_by_name(@user_input)
+                    if items != []
+                        if items.length > 1
+                            puts "Here are some possible matches of what you're looking for."
+                        end
+                        display_specific_items(items)
+                        puts "Enter the number of the item you'd like to know more about:"
+                        @user_input = gets.chomp
+                        if @user_input != "exit"
+                            choose_item((@user_input.to_i - 1), items)
+                        end
                     else
-                        puts "Sorry, item not found."
+                        puts "Sorry, there are no items by that name."
                     end
                 end
             when "3"

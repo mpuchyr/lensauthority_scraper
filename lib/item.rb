@@ -26,7 +26,16 @@ class Item
     end
 
     def self.find_by_name(searched_name)
-        self.all.detect {|item| item.name.downcase == searched_name.downcase}
+        possible_matches = []
+        self.all.each do |item|
+            if item.name.downcase == searched_name.downcase
+                possible_matches << item
+                break
+            elsif item.name.downcase.include?(searched_name.downcase)
+                possible_matches << item
+            end
+        end
+        possible_matches
     end
 
 
