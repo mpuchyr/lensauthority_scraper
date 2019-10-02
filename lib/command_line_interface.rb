@@ -31,12 +31,13 @@ class CommandLineInterface
                         if items.length > 1
                             puts "Here are some possible matches of what you're looking for."
                         end
-                        display_specific_items(items)
-                        puts "Enter the number of the item you'd like to know more about:"
-                        @user_input = gets.chomp
-                        if @user_input != "exit"
-                            choose_item((@user_input.to_i - 1), items)
-                        end
+                        get_specific_item_info_from_list(items)
+                        # display_specific_items(items)
+                        # puts "Enter the number of the item you'd like to know more about:"
+                        # @user_input = gets.chomp
+                        # if @user_input != "exit"
+                        #     choose_item((@user_input.to_i - 1), items)
+                        # end
                     else
                         puts "Sorry, there are no items by that name."
                     end
@@ -47,12 +48,13 @@ class CommandLineInterface
                 if @user_input != "exit"
                     items = Item.find_by_brand(@user_input)
                     if items != []
-                        display_specific_items(items)
-                        puts "Enter the number of the item you'd like to know more about:"
-                        @user_input = gets.chomp
-                        if @user_input != "exit"
-                            choose_item((@user_input.to_i - 1), items)
-                        end
+                        get_specific_item_info_from_list(items)
+                        # display_specific_items(items)
+                        # puts "Enter the number of the item you'd like to know more about:"
+                        # @user_input = gets.chomp
+                        # if @user_input != "exit"
+                        #     choose_item((@user_input.to_i - 1), items)
+                        # end
                     else
                         puts "Sorry, there are no items from that brand."
                     end
@@ -64,10 +66,11 @@ class CommandLineInterface
                     user_price = @user_input.to_i
                     items = Item.find_by_starting_price(user_price)
                     if items != []
-                        display_specific_items(items)
-                        puts "Enter the number of the item you'd like to know more about:"
-                        @user_input = gets.chomp
-                        choose_item((@user_input.to_i - 1), items)
+                        get_specific_item_info_from_list(items)
+                        # display_specific_items(items)
+                        # puts "Enter the number of the item you'd like to know more about:"
+                        # @user_input = gets.chomp
+                        # choose_item((@user_input.to_i - 1), items)
                     else
                         puts "Sorry, there are not items at that price."
                     end
@@ -115,6 +118,15 @@ class CommandLineInterface
         item = item_array[index]
         add_details_to_item(item)
         item.display_info
+    end
+
+    def get_specific_item_info_from_list(items)
+        display_specific_items(items)
+        puts "Enter the number of the item you'd like to know more about:"
+        @user_input = gets.chomp
+        if @user_input != "exit"
+            choose_item((@user_input.to_i - 1), items)
+        end
     end
 
 
