@@ -50,9 +50,26 @@ class CommandLineInterface
                         display_specific_items(items)
                         puts "Enter the number of the item you'd like to know more about:"
                         @user_input = gets.chomp
-                        choose_item((@user_input.to_i - 1), items)
+                        if @user_input != "exit"
+                            choose_item((@user_input.to_i - 1), items)
+                        end
                     else
                         puts "Sorry, there are no items from that brand."
+                    end
+                end
+            when "4"
+                puts "Enter the price you're looking for:"
+                @user_input = gets.chomp
+                if @user_input != "exit"
+                    user_price = @user_input.to_i
+                    items = Item.find_by_starting_price(user_price)
+                    if items != []
+                        display_specific_items(items)
+                        puts "Enter the number of the item you'd like to know more about:"
+                        @user_input = gets.chomp
+                        choose_item((@user_input.to_i - 1), items)
+                    else
+                        puts "Sorry, there are not items at that price."
                     end
                 end
             end
@@ -79,6 +96,7 @@ class CommandLineInterface
         puts "1. List all products"
         puts "2. Find specific product"
         puts "3. Find products by brand"
+        puts "4. Find products by starting price"
     end
 
     def display_all

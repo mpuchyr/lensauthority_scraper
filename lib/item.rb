@@ -38,6 +38,16 @@ class Item
         possible_matches
     end
 
+    def self.find_by_starting_price(price)
+        matches = []
+        self.all.each do |item|
+            if item.starting_price == price
+                matches << item
+            end
+        end
+        matches
+    end
+
 
     def display_info
         puts "\n"
@@ -58,6 +68,7 @@ class Item
         puts "-------------"
         puts "\n"
         puts self.description
+        puts "\n\n"
     end
 
 
