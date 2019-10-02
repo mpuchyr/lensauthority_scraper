@@ -53,8 +53,8 @@ class Item
     def display_info
         puts "\n"
         puts self.name.colorize(:light_blue)
-        puts "Brand:" + " #{self.brand}".colorize(:light_blue)
         puts "-------------"
+        puts "Brand:" + " #{self.brand}".colorize(:light_blue)
         if self.condition
             self.condition.each do |detail|
                 if detail.length == 3
