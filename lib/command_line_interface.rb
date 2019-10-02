@@ -13,52 +13,55 @@ class CommandLineInterface
         until @user_input == "exit" do
             main_menu
             @user_input = gets.chomp
+            user_choice(@user_input)
+        end
+    end
 
-            case @user_input
-            when "1"
-                display_all
-                puts "Enter the number of the item you'd like to know more about:"
-                @user_input = gets.chomp
-                if @user_input != "exit"
-                    choose_item((@user_input.to_i - 1), Item.all)
-                end
+    def user_choice(input)
+        case @user_input
+        when "1"
+            display_all
+            puts "Enter the number of the item you'd like to know more about:"
+            @user_input = gets.chomp
+            if @user_input != "exit"
+                choose_item((@user_input.to_i - 1), Item.all)
+            end
 
-            when "2"
-                puts "Enter the product name:"
-                @user_input = gets.chomp
-                if @user_input != "exit"
-                    items = Item.find_by_name(@user_input)
-                    if items != []
-                        if items.length > 1
-                            puts "Here are some possible matches of what you're looking for."
-                        end
-                        get_specific_item_info_from_list(items)
-                    else
-                        puts "Sorry, there are no items by that name."
+        when "2"
+            puts "Enter the product name:"
+            @user_input = gets.chomp
+            if @user_input != "exit"
+                items = Item.find_by_name(@user_input)
+                if items != []
+                    if items.length > 1
+                        puts "Here are some possible matches of what you're looking for."
                     end
+                    get_specific_item_info_from_list(items)
+                else
+                    puts "Sorry, there are no items by that name."
                 end
-            when "3"
-                puts "Enter the brand you're looking for:"
-                @user_input = gets.chomp
-                if @user_input != "exit"
-                    items = Item.find_by_brand(@user_input)
-                    if items != []
-                        get_specific_item_info_from_list(items)
-                    else
-                        puts "Sorry, there are no items from that brand."
-                    end
+            end
+        when "3"
+            puts "Enter the brand you're looking for:"
+            @user_input = gets.chomp
+            if @user_input != "exit"
+                items = Item.find_by_brand(@user_input)
+                if items != []
+                    get_specific_item_info_from_list(items)
+                else
+                    puts "Sorry, there are no items from that brand."
                 end
-            when "4"
-                puts "Enter the price you're looking for:"
-                @user_input = gets.chomp
-                if @user_input != "exit"
-                    user_price = @user_input.to_i
-                    items = Item.find_by_starting_price(user_price)
-                    if items != []
-                        get_specific_item_info_from_list(items)
-                    else
-                        puts "Sorry, there are not items at that price."
-                    end
+            end
+        when "4"
+            puts "Enter the price you're looking for:"
+            @user_input = gets.chomp
+            if @user_input != "exit"
+                user_price = @user_input.to_i
+                items = Item.find_by_starting_price(user_price)
+                if items != []
+                    get_specific_item_info_from_list(items)
+                else
+                    puts "Sorry, there are not items at that price."
                 end
             end
         end
@@ -95,7 +98,7 @@ class CommandLineInterface
 
     def display_specific_items(item_array)
         item_array.each.with_index(1) do |item, index|
-            puts "#{index}. #{item.name}"
+            puts "#{index.to_s.colorize(:green)}. #{item.name}"
         end
     end
 

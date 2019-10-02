@@ -58,9 +58,9 @@ class Item
         if self.condition
             self.condition.each do |detail|
                 if detail.length == 3
-                    puts "Condition: #{detail[0]}  Shutter: #{detail[1]}  Price: #{detail[2]}"
+                    puts "Condition: #{detail[0].colorize(:yellow)}  Shutter: #{detail[1].colorize(:yellow)}  Price: #{detail[2].colorize(:yellow)}"
                 elsif detail.length == 2
-                    puts "Condition: #{detail[0]}  Price: #{detail[1]}"
+                    puts "Condition: #{detail[0].colorize(:yellow)}  Price: #{detail[1].colorize(:yellow)}"
                 end
             end
         end
