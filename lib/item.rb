@@ -1,6 +1,6 @@
 require 'pry'
 class Item
-    attr_accessor :brand, :name, :link, :description, :starting_price, :stock, :condition, #:price 
+    attr_accessor :brand, :name, :link, :description, :starting_price, :stock, :condition #:price 
 
     @@all = []
 
@@ -40,13 +40,23 @@ class Item
 
 
     def display_info
+        puts "\n"
         puts self.name
         puts "Brand: #{self.brand}"
-        if self.price
-            puts self.price
-            puts "Condition: #{self.condition}"
+        puts "-------------"
+        if self.condition
+            self.condition.each do |detail|
+                if detail.length == 3
+                    puts "Condition: #{detail[0]}  Shutter:#{detail[1]}  Price:#{detail[2]}"
+                elsif detail.length == 2
+                    puts "Condition: #{detail[0]}  Price:#{detail[1]}"
+                end
+            end
         end
+        puts "\n"
         puts "Stock: #{self.stock}"
+        puts "-------------"
+        puts "\n"
         puts self.description
     end
 

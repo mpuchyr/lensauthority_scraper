@@ -44,12 +44,11 @@ class Scraper
                 condition << prices_conditions.shift
                 all_conditions << condition
             end
-            binding.pry
 
             # price = doc.css("#display-price").text.strip
             stock = doc.css("#product-variants h4").text.strip
             # condition = doc.css("table td")[1].text.strip
-            item_details = {:description => item_description, :stock => stock, :condition => all_conditions, :price => price}
+            item_details = {:description => item_description, :stock => stock, :condition => all_conditions}
         else
             stock = doc.css(".row .label").text
             item_details = {:description => item_description, :stock => stock}
@@ -60,11 +59,5 @@ class Scraper
 
 end
 
-Scraper.scrape_details_page("/products/canon-eos-5ds-camera")
-
-# prices_conditions.css("td").each do |item|
-#   if item.text.match(/[a-zA-Z$\d]+/)
-#       puts item.text.strip
-#   end
-# end
-
+# Test Code
+# Scraper.scrape_details_page("/products/canon-eos-5ds-camera")
