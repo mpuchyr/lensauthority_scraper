@@ -23,6 +23,8 @@ class Scraper
         html = MAIN_HTML + product_link
         doc = Nokogiri::HTML(open(html))
         descriptions = doc.css(".tab-content .tab-pane")
+        item_status = []
+
 
         text_match = descriptions[1].text.match(/[a-zA-Z\S]+ Take/).to_s
         if text_match != ""
@@ -33,10 +35,21 @@ class Scraper
 
 
         if doc.css(".row .label").text != "Out of Stock"
-            price = doc.css("#display-price").text.strip
+            all_conditions = []
+            prices_conditions = doc.css(".table tr label").text
+            prices_conditions = prices_conditions.split("\n")
+            until prices_conditions == [] do
+                condition = prices_conditions.shift
+                condition = condition.split("Shutter: ")
+                condition << prices_conditions.shift
+                all_conditions << condition
+            end
+            binding.pry
+
+            # price = doc.css("#display-price").text.strip
             stock = doc.css("#product-variants h4").text.strip
-            condition = doc.css("table td")[1].text.strip
-            item_details = {:description => item_description, :stock => stock, :condition => condition, :price => price}
+            # condition = doc.css("table td")[1].text.strip
+            item_details = {:description => item_description, :stock => stock, :condition => all_conditions, :price => price}
         else
             stock = doc.css(".row .label").text
             item_details = {:description => item_description, :stock => stock}
@@ -47,5 +60,11 @@ class Scraper
 
 end
 
+Scraper.scrape_details_page("/products/canon-eos-5ds-camera")
 
+# prices_conditions.css("td").each do |item|
+#   if item.text.match(/[a-zA-Z$\d]+/)
+#       puts item.text.strip
+#   end
+# end
 
