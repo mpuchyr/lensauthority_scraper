@@ -1,6 +1,6 @@
 require 'pry'
 class Item
-    attr_accessor :brand, :name, :link, :description, :starting_price, :stock, :condition #:price 
+    attr_accessor :brand, :name, :link, :description, :starting_price, :stock, :condition
 
     @@all = []
 

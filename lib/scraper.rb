@@ -14,7 +14,8 @@ class Scraper
             brand = item.css(".caption h5").text.split(" ")[0]
             name = item.css(".caption h5").text.split("Out of Stock")[0].strip
             link = item.css(".caption h5 a").attribute("href").text
-            item_details << {:brand => brand, :name => name, :link => link}
+            starting_price = item.css(".caption h4").text.strip
+            item_details << {:brand => brand, :name => name, :link => link, :starting_price => starting_price}
         end
         item_details
     end
@@ -45,9 +46,7 @@ class Scraper
                 all_conditions << condition
             end
 
-            # price = doc.css("#display-price").text.strip
             stock = doc.css("#product-variants h4").text.strip
-            # condition = doc.css("table td")[1].text.strip
             item_details = {:description => item_description, :stock => stock, :condition => all_conditions}
         else
             stock = doc.css(".row .label").text
@@ -60,4 +59,4 @@ class Scraper
 end
 
 # Test Code
-# Scraper.scrape_details_page("/products/canon-eos-5ds-camera")
+# Scraper.scrape_special_deals("https://www.lensauthority.com/t/camera-systems/special-deals")
