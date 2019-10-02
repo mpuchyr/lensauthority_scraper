@@ -1,3 +1,4 @@
+require 'colorize'
 require 'pry'
 class Item
     attr_accessor :brand, :name, :link, :description, :starting_price, :stock, :condition
@@ -51,20 +52,24 @@ class Item
 
     def display_info
         puts "\n"
-        puts self.name
-        puts "Brand: #{self.brand}"
+        puts self.name.colorize(:light_blue)
+        puts "Brand:" + " #{self.brand}".colorize(:light_blue)
         puts "-------------"
         if self.condition
             self.condition.each do |detail|
                 if detail.length == 3
-                    puts "Condition: #{detail[0]}  Shutter:#{detail[1]}  Price:#{detail[2]}"
+                    puts "Condition: #{detail[0]}  Shutter: #{detail[1]}  Price: #{detail[2]}"
                 elsif detail.length == 2
-                    puts "Condition: #{detail[0]}  Price:#{detail[1]}"
+                    puts "Condition: #{detail[0]}  Price: #{detail[1]}"
                 end
             end
         end
         puts "\n"
-        puts "Stock: #{self.stock}"
+        if self.stock == "Out of Stock"
+            puts "Stock:" + " #{self.stock}".colorize(:red)
+        else
+            puts "Stock:" + " #{self.stock}".colorize(:green)
+        end
         puts "-------------"
         puts "\n"
         puts self.description

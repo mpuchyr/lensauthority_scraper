@@ -1,5 +1,6 @@
 require_relative 'scraper.rb'
 require_relative 'item.rb'
+require 'colorize'
 require 'pry'
 
 class CommandLineInterface
@@ -26,18 +27,12 @@ class CommandLineInterface
                 puts "Enter the product name:"
                 @user_input = gets.chomp
                 if @user_input != "exit"
-                items = Item.find_by_name(@user_input)
+                    items = Item.find_by_name(@user_input)
                     if items != []
                         if items.length > 1
                             puts "Here are some possible matches of what you're looking for."
                         end
                         get_specific_item_info_from_list(items)
-                        # display_specific_items(items)
-                        # puts "Enter the number of the item you'd like to know more about:"
-                        # @user_input = gets.chomp
-                        # if @user_input != "exit"
-                        #     choose_item((@user_input.to_i - 1), items)
-                        # end
                     else
                         puts "Sorry, there are no items by that name."
                     end
@@ -49,12 +44,6 @@ class CommandLineInterface
                     items = Item.find_by_brand(@user_input)
                     if items != []
                         get_specific_item_info_from_list(items)
-                        # display_specific_items(items)
-                        # puts "Enter the number of the item you'd like to know more about:"
-                        # @user_input = gets.chomp
-                        # if @user_input != "exit"
-                        #     choose_item((@user_input.to_i - 1), items)
-                        # end
                     else
                         puts "Sorry, there are no items from that brand."
                     end
@@ -67,10 +56,6 @@ class CommandLineInterface
                     items = Item.find_by_starting_price(user_price)
                     if items != []
                         get_specific_item_info_from_list(items)
-                        # display_specific_items(items)
-                        # puts "Enter the number of the item you'd like to know more about:"
-                        # @user_input = gets.chomp
-                        # choose_item((@user_input.to_i - 1), items)
                     else
                         puts "Sorry, there are not items at that price."
                     end
@@ -94,17 +79,17 @@ class CommandLineInterface
     end
 
     def main_menu
-        puts "Please choose the number of the action you'd like to take:"
-        puts "Type 'exit' to quit."
-        puts "1. List all products"
-        puts "2. Find specific product"
-        puts "3. Find products by brand"
-        puts "4. Find products by starting price"
+        puts "Please choose the number of the action you'd like to take:".colorize(:light_blue)
+        puts "Type 'exit' to quit.".colorize(:light_blue)
+        puts "1.".colorize(:light_blue) + " List all products"
+        puts "2.".colorize(:light_blue) + " Find specific product"
+        puts "3.".colorize(:light_blue) + " Find products by brand"
+        puts "4.".colorize(:light_blue) + " Find products by starting price"
     end
 
     def display_all
         Item.all.each.with_index(1) do |item, index|
-            puts "#{index}. #{item.name}"
+            puts "#{index.to_s.colorize(:green)}. #{item.name}"
         end
     end
 
