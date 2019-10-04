@@ -42,7 +42,7 @@ class Item
     def self.find_by_starting_price(price)
         matches = []
         self.all.each do |item|
-            if item.starting_price == price
+            if item.starting_price <= price
                 matches << item
             end
         end
@@ -55,6 +55,7 @@ class Item
         puts self.name.colorize(:light_blue)
         puts "-------------"
         puts "Brand:" + " #{self.brand}".colorize(:light_blue)
+        puts "\n"
         if self.condition
             self.condition.each do |detail|
                 if detail.length == 3

@@ -87,7 +87,7 @@ class CommandLineInterface
         puts "1.".colorize(:light_blue) + " List all products"
         puts "2.".colorize(:light_blue) + " Find specific product"
         puts "3.".colorize(:light_blue) + " Find products by brand"
-        puts "4.".colorize(:light_blue) + " Find products by starting price"
+        puts "4.".colorize(:light_blue) + " Find products by starting price (includes all items starting at a lower price)"
     end
 
     def display_all
