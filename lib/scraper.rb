@@ -57,5 +57,3 @@ class Scraper
 
 end
 
-# Test Code
-# Scraper.scrape_special_deals("https://www.lensauthority.com/t/camera-systems/special-deals")
