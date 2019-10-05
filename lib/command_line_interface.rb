@@ -34,7 +34,7 @@ class CommandLineInterface
                 items = Item.find_by_name(@user_input)
                 if items != []
                     if items.length > 1
-                        puts "Here are some possible matches of what you're looking for."
+                        puts "Here are some possible matches of what you're looking for:"
                     end
                     get_specific_item_info_from_list(items)
                 else
