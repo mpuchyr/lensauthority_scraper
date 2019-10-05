@@ -85,7 +85,7 @@ class CommandLineInterface
         puts "Please choose the number of the action you'd like to take:".colorize(:light_blue)
         puts "Type 'exit' to quit.".colorize(:light_blue)
         puts "1.".colorize(:light_blue) + " List all products"
-        puts "2.".colorize(:light_blue) + " Find specific product"
+        puts "2.".colorize(:light_blue) + " Find product by name/keyword"
         puts "3.".colorize(:light_blue) + " Find products by brand"
         puts "4.".colorize(:light_blue) + " Find products by starting price (includes all items starting at a lower price)"
     end

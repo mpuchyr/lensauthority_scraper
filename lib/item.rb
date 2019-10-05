@@ -28,12 +28,21 @@ class Item
 
     def self.find_by_name(searched_name)
         possible_matches = []
+        search_terms = searched_name.downcase.split(" ")
         self.all.each do |item|
             if item.name.downcase == searched_name.downcase
                 possible_matches = [item]
                 break
-            elsif item.name.downcase.include?(searched_name.downcase)
-                possible_matches << item
+            else
+                search_terms.each do |term|
+                    self.all.each do |item|
+                        if item.name.downcase.include?(term)
+                            if !possible_matches.include?(item)
+                                possible_matches << item
+                            end
+                        end
+                    end
+                end
             end
         end
         possible_matches
