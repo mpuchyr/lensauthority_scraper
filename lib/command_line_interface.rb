@@ -23,14 +23,14 @@ class CommandLineInterface
             display_all
             puts "Enter the number of the item you'd like to know more about:"
             @user_input = gets.chomp
-            if @user_input != "exit"
+            if @user_input != "exit" && @user_input != "b"
                 choose_item((@user_input.to_i - 1), Item.all)
             end
 
         when "2"
             puts "Enter the product name:"
             @user_input = gets.chomp
-            if @user_input != "exit"
+            if @user_input != "exit" && @user_input != "b"
                 items = Item.find_by_name(@user_input)
                 if items != []
                     if items.length > 1
@@ -38,30 +38,30 @@ class CommandLineInterface
                     end
                     get_specific_item_info_from_list(items)
                 else
-                    puts "Sorry, there are no items by that name."
+                    puts "Sorry, no items were found.".colorize(:red)
                 end
             end
         when "3"
             puts "Enter the brand you're looking for:"
             @user_input = gets.chomp
-            if @user_input != "exit"
+            if @user_input != "exit" && @user_input != "b"
                 items = Item.find_by_brand(@user_input)
                 if items != []
                     get_specific_item_info_from_list(items)
                 else
-                    puts "Sorry, there are no items from that brand."
+                    puts "Sorry, there are no items from that brand.".colorize(:red)
                 end
             end
         when "4"
             puts "Enter the price you're looking for:"
             @user_input = gets.chomp
-            if @user_input != "exit"
+            if @user_input != "exit" && @user_input != "b"
                 user_price = @user_input.to_i
                 items = Item.find_by_starting_price(user_price)
                 if items != []
                     get_specific_item_info_from_list(items)
                 else
-                    puts "Sorry, there are not items at that price."
+                    puts "Sorry, there are not items at that price.".colorize(:red)
                 end
             end
         end
@@ -83,6 +83,7 @@ class CommandLineInterface
 
     def main_menu
         puts "Please choose the number of the action you'd like to take:".colorize(:light_blue)
+        puts "Press 'b' to return to this menu.".colorize(:light_blue)
         puts "Type 'exit' to quit.".colorize(:light_blue)
         puts "1.".colorize(:light_blue) + " List all products"
         puts "2.".colorize(:light_blue) + " Find product by name/keyword"
@@ -111,8 +112,9 @@ class CommandLineInterface
     def get_specific_item_info_from_list(items)
         display_specific_items(items)
         puts "Enter the number of the item you'd like to know more about:"
+        puts "Press 'b' to go to main menu."
         @user_input = gets.chomp
-        if @user_input != "exit"
+        if @user_input != "exit" && @user_input != "b"
             choose_item((@user_input.to_i - 1), items)
         end
     end
