@@ -28,7 +28,7 @@ class CommandLineInterface
             end
 
         when "2"
-            puts "Enter the product name:"
+            puts "Enter the product name or keyword:"
             @user_input = gets.chomp
             if @user_input != "exit" && @user_input != "b"
                 items = Item.find_by_name(@user_input)
